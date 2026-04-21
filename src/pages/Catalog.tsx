@@ -63,7 +63,7 @@ export default function Catalog() {
       {/* Header Section */}
       <section className="py-12 bg-surface/30 border-b border-white/5">
         <div className="container mx-auto px-6">
-          <h1 className="text-5xl md:text-7xl font-headline font-black text-white uppercase tracking-tighter mb-4">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-headline font-black text-white uppercase tracking-tighter mb-4">
             Estoque <span className="text-primary italic">Premium</span>
           </h1>
           <p className="text-on-surface-variant uppercase tracking-[0.3em] font-bold text-sm">

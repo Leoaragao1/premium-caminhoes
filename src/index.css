@@ -18,7 +18,17 @@
     @apply bg-background text-on-surface font-body min-h-screen relative;
     background-image: radial-gradient(circle at top right, rgba(242, 202, 80, 0.03), transparent 400px),
                       radial-gradient(circle at bottom left, rgba(242, 202, 80, 0.02), transparent 400px);
+    @apply overflow-x-hidden;
   }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
 }
 
 .industrial-gradient {

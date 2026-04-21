@@ -59,7 +59,7 @@ export default function ProductDetail() {
   ];
 
   return (
-    <div className="pt-24 bg-background">
+    <div className="pt-24 bg-background pb-24 lg:pb-0">
       {/* Visual Section */}
       <section className="px-6 md:px-12 py-8 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8 space-y-6">
@@ -109,7 +109,7 @@ export default function ProductDetail() {
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pt-4">
               <div>
-                <h1 className="text-4xl md:text-7xl font-headline font-black text-white uppercase tracking-tighter leading-none mb-2">
+                <h1 className="text-3xl sm:text-5xl lg:text-7xl font-headline font-black text-white uppercase tracking-tighter leading-none mb-2">
                   {vehicle.brand} <span className="text-primary">{vehicle.model}</span>
                 </h1>
                 <p className="text-on-surface-variant flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em]">
@@ -118,7 +118,7 @@ export default function ProductDetail() {
               </div>
               <div className="text-right">
                  <span className="text-primary font-headline font-black text-xs uppercase tracking-widest block mb-2">Investimento Premium</span>
-                 <span className="text-4xl md:text-6xl font-headline font-black text-white">{formatCurrency(vehicle.price)}</span>
+                 <span className="text-3xl sm:text-4xl md:text-6xl font-headline font-black text-white">{formatCurrency(vehicle.price)}</span>
               </div>
             </div>
         </div>
@@ -231,6 +231,23 @@ export default function ProductDetail() {
             </div>
          </section>
       )}
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 w-full p-4 bg-background/80 backdrop-blur-lg border-t border-white/5 z-40 lg:hidden flex gap-4">
+          <Link 
+            to={`/contato?veiculo=${encodeURIComponent(`${vehicle.brand} ${vehicle.model}`)}`} 
+            className="flex-1 industrial-gradient text-black h-14 flex items-center justify-center font-headline font-black uppercase tracking-widest text-xs"
+          >
+             Tenho Interesse
+          </Link>
+          <a 
+            href={`https://wa.me/557799650789?text=Olá! Gostaria de mais informações sobre o ${vehicle.brand} ${vehicle.model}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-14 h-14 bg-[#25D366] text-white flex items-center justify-center rounded-sm"
+          >
+            <MessageSquare size={24} fill="currentColor" />
+          </a>
+      </div>
     </div>
   );
 }

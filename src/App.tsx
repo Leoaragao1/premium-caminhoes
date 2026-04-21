@@ -15,6 +15,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import CookieConsent from './components/CookieConsent';
 
+import { MessageSquare } from 'lucide-react';
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<boolean>(false);
@@ -57,6 +59,17 @@ export default function App() {
           </Routes>
         </main>
         <CookieConsent />
+        
+        {/* Floating WhatsApp for Mobile */}
+        <a 
+          href="https://wa.me/557799650789" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all md:hidden flex items-center justify-center animate-bounce-slow"
+        >
+          <MessageSquare size={24} fill="currentColor" />
+        </a>
+
         <Footer />
       </div>
     </Router>

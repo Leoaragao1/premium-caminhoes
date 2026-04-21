@@ -48,8 +48,28 @@ export default function Admin() {
         </div>
       </aside>
 
+      {/* Mobile Admin Nav */}
+      <nav className="fixed bottom-0 left-0 w-full bg-surface border-t border-white/5 flex md:hidden z-[100]">
+        {tabs.map(tab => {
+          const isActive = location.pathname === tab.href;
+          return (
+            <Link 
+              key={tab.label} 
+              to={tab.href}
+              className={cn(
+                "flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-all",
+                isActive ? "text-primary" : "text-on-surface-variant"
+              )}
+            >
+              <tab.icon size={20} />
+              <span className="text-[8px] font-bold uppercase tracking-widest">{tab.label.split(' ')[0]}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
       {/* Main Content */}
-      <main className="flex-grow p-6 md:p-12 overflow-x-hidden">
+      <main className="flex-grow p-6 md:p-12 pb-24 md:pb-12 overflow-x-hidden">
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/veiculos" element={<VehicleManager />} />

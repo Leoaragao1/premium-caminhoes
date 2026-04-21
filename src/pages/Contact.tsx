@@ -40,7 +40,7 @@ export default function Contact() {
     <div className="pt-24 min-h-screen bg-background relative overflow-hidden flex flex-col">
       <section className="py-24 container mx-auto px-6 relative z-10 flex-grow">
         <div className="max-w-4xl mb-16">
-           <h1 className="text-6xl md:text-8xl font-headline font-black text-white uppercase tracking-tighter leading-none mb-8">
+           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-headline font-black text-white uppercase tracking-tighter leading-none mb-8">
               Fale com a <span className="text-primary italic">Elite</span>
            </h1>
            <p className="text-on-surface-variant font-headline font-bold text-sm md:text-lg uppercase tracking-[0.3em] max-w-2xl border-l-4 border-primary pl-6">

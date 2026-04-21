@@ -116,15 +116,41 @@ export default function Home() {
             <img 
               src={displayBanners[currentSlide]?.imageUrl} 
               alt={displayBanners[currentSlide]?.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover px-0" // Ensure no horizontal padding on images
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+            
+            {/* Banner Content */}
+            <div className="absolute inset-0 flex items-center">
+              <div className="container mx-auto px-6">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="max-w-2xl"
+                >
+                  <h1 className="text-4xl sm:text-6xl lg:text-8xl font-headline font-black text-white uppercase tracking-tighter leading-[0.9] mb-6 italic">
+                    {displayBanners[currentSlide]?.title.split(' ').map((word, i) => (
+                      <span key={i} className={i % 2 !== 0 ? "text-primary" : ""}>{word} </span>
+                    ))}
+                  </h1>
+                  <div className="flex flex-wrap gap-4 mt-8">
+                    <Link 
+                      to="/estoque" 
+                      className="industrial-gradient text-black px-8 sm:px-12 py-4 sm:py-5 font-headline font-black uppercase tracking-widest text-xs sm:text-sm hover:scale-105 transition-all shadow-2xl shadow-primary/20"
+                    >
+                      Ver Estoque
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </motion.div>
         </AnimatePresence>
 
         {/* Carousel Nav */}
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-4 z-40">
+        <div className="absolute bottom-16 left-6 sm:left-auto sm:right-6 flex gap-4 z-40">
           {displayBanners.map((_, i) => (
             <button 
               key={i}
@@ -140,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Quick Search */}
-      <section className="relative z-20 -mt-20 container mx-auto px-6">
+      <section className="relative z-20 -mt-10 sm:-mt-20 container mx-auto px-6">
         <div className="bg-surface p-8 shadow-2xl border-b-4 border-primary">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-2">
@@ -192,10 +218,10 @@ export default function Home() {
       <section className="py-24 container mx-auto px-6">
         <div className="flex justify-between items-end mb-12">
           <div>
-            <h2 className="text-4xl md:text-6xl font-headline font-black text-white uppercase tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-headline font-black text-white uppercase tracking-tighter">
               Destaques <span className="text-primary">Elite</span>
             </h2>
-            <p className="text-on-surface-variant mt-2 max-w-lg">As máquinas mais potentes do mercado selecionadas para sua frota de alto desempenho.</p>
+            <p className="text-on-surface-variant mt-2 max-w-lg text-sm sm:text-base">As máquinas mais potentes do mercado selecionadas para sua frota de alto desempenho.</p>
           </div>
           <div className="flex gap-2">
              <button className="w-12 h-12 border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
@@ -258,8 +284,8 @@ export default function Home() {
                 <div className="absolute -right-20 -top-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all" />
                 <div>
                   <ShieldCheck size={64} className="text-primary mb-8" />
-                  <h3 className="text-5xl font-headline font-black text-white uppercase tracking-tighter mb-4">Inspeção <span className="text-primary">Ouro</span> Premium</h3>
-                  <p className="text-on-surface-variant text-lg max-w-md">Cada veículo passa por um rigoroso checklist. Segurança e procedência são nossas prioridades absolutas.</p>
+                  <h3 className="text-3xl sm:text-5xl font-headline font-black text-white uppercase tracking-tighter mb-4">Inspeção <span className="text-primary">Ouro</span> Premium</h3>
+                  <p className="text-on-surface-variant text-base sm:text-lg max-w-md">Cada veículo passa por um rigoroso checklist. Segurança e procedência são nossas prioridades absolutas.</p>
                 </div>
                 <Link to="#" className="text-primary font-headline font-bold uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all mt-12">
                    Conheça nossa certificação <ArrowRight size={20} />
@@ -268,8 +294,8 @@ export default function Home() {
               <div className="md:col-span-4 bg-primary p-12 flex flex-col justify-between">
                  <Headset size={64} className="text-black" />
                  <div>
-                    <h3 className="text-3xl font-headline font-black text-black uppercase mb-4">Suporte 24/7</h3>
-                    <p className="text-black/80 font-bold uppercase text-sm tracking-widest">Equipe dedicada para manter sua frota sempre em movimento.</p>
+                    <h3 className="text-2xl sm:text-3xl font-headline font-black text-black uppercase mb-4">Suporte 24/7</h3>
+                    <p className="text-black/80 font-bold uppercase text-[10px] sm:text-sm tracking-widest">Equipe dedicada para manter sua frota sempre em movimento.</p>
                  </div>
               </div>
           </div>
@@ -281,11 +307,11 @@ export default function Home() {
           <div className="container mx-auto px-6 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                   <div>
-                    <span className="text-primary font-headline font-black text-sm uppercase tracking-[0.4em] mb-4 block">ONDE ESTAMOS</span>
-                    <h2 className="text-5xl md:text-7xl font-headline font-black text-white uppercase tracking-tighter leading-none mb-8">
+                    <span className="text-primary font-headline font-black text-[10px] sm:text-sm uppercase tracking-[0.4em] mb-4 block">ONDE ESTAMOS</span>
+                    <h2 className="text-3xl sm:text-5xl lg:text-7xl font-headline font-black text-white uppercase tracking-tighter leading-none mb-8">
                        Visite Nossa <span className="text-primary">Sede</span> Premium
                     </h2>
-                    <p className="text-on-surface-variant text-lg mb-8 uppercase font-bold tracking-widest leading-relaxed">
+                    <p className="text-on-surface-variant text-base sm:text-lg mb-8 uppercase font-bold tracking-widest leading-relaxed">
                        Anel Rodoviário Jadiel Matos Leste<br/>
                        Chacaras Santa Tereza<br/>
                        Vitória da Conquista - BA, 45000-000
