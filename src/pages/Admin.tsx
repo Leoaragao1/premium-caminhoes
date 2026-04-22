@@ -1498,24 +1498,43 @@ function MediaUpload({
 
     setUploading(true);
     try {
+      console.log(`Iniciando upload para: ${folder}/${file.name}`);
       const storageRef = ref(storage, `${folder}/${Date.now()}_${file.name}`);
-      await uploadBytes(storageRef, file);
+      
+      const uploadResult = await uploadBytes(storageRef, file);
+      console.log("Upload no Storage concluído:", uploadResult);
+      
       const url = await getDownloadURL(storageRef);
+      console.log("URL obtida:", url);
 
       // Registrar na biblioteca
-      await addDoc(collection(db, "media"), {
+      const mediaItem = {
         url,
         name: file.name,
         createdAt: Date.now(),
         type: file.type,
         size: file.size,
-      });
+      };
+
+      console.log("Salvando metadados no Firestore...");
+      await addDoc(collection(db, "media"), mediaItem);
+      console.log("Metadados salvos.");
 
       setPreview(url);
       onUpload(url);
-    } catch (err) {
-      console.error(err);
-      alert("Erro ao fazer upload da imagem.");
+    } catch (err: any) {
+      console.error("Erro detalhado no upload:", err);
+      let errorMessage = "Erro ao fazer upload da imagem.";
+      
+      if (err.code === 'storage/unauthorized') {
+        errorMessage = "Acesso negado ao Storage. Verifique as regras de segurança no console do Firebase.";
+      } else if (err.code === 'storage/retry-limit-exceeded') {
+        errorMessage = "Limite de tempo excedido. Verifique sua conexão.";
+      } else if (err.code === 'permission-denied') {
+        errorMessage = "Erro de permissão no Banco de Dados (Firestore).";
+      }
+
+      alert(`${errorMessage}\n\nDetalhes: ${err.message || 'Erro desconhecido'}`);
     } finally {
       setUploading(false);
     }

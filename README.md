@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Site de Veículos Premium
 
-# Run and deploy your AI Studio app
+Este projeto foi construído com React + Vite e Firebase. Para hospedar este projeto em seu próprio servidor, siga as instruções abaixo:
 
-This contains everything you need to run your app locally.
+## Pré-requisitos
+- Node.js instalado
+- Uma conta no Firebase com Firestore e Storage ativos.
 
-View your app in AI Studio: https://ai.studio/apps/00d52f2c-1bad-4538-971c-e963f0ca9abb
+## Configuração de Ambiente
+Crie um arquivo `.env` na raiz do projeto com as chaves do seu projeto Firebase (veja o `.env.example` para referência):
 
-## Run Locally
+```env
+VITE_FIREBASE_API_KEY=sua_chave
+VITE_FIREBASE_AUTH_DOMAIN=seu_dominio.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=seu_id_do_projeto
+VITE_FIREBASE_STORAGE_BUCKET=seu_bucket.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=seu_id_de_mensagens
+VITE_FIREBASE_APP_ID=seu_id_da_app
+VITE_FIREBASE_FIRESTORE_DATABASE_ID=(default)
+```
 
-**Prerequisites:**  Node.js
+## Como rodar localmente
+1. Instale as dependências: `npm install`
+2. Inicie o servidor de desenvolvimento: `npm run dev`
 
+## Como hospedar no seu servidor
+1. Gere os arquivos de produção: `npm run build`
+2. O comando acima criará uma pasta `dist/`.
+3. Tudo o que você precisa fazer é subir o conteúdo da pasta `dist/` para o seu servidor web (Apache, Nginx, Vercel, Netlify, Firebase Hosting, etc.).
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Segurança
+Certifique-se de configurar as **Firestore Rules** e **Storage Rules** no console do Firebase para que apenas você possa editar os veículos enquanto o público só possa ler. Use o arquivo `firestore.rules` incluído neste projeto como base.

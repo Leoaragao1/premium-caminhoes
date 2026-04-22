@@ -49,6 +49,11 @@ service cloud.firestore {
       allow read, delete, update: if isAdmin();
     }
 
+    // Media Library
+    match /media/{mediaId} {
+      allow read, write: if isAdmin();
+    }
+
     // Visits (Analytics)
     match /visits/{visitId} {
       allow create: if true;
